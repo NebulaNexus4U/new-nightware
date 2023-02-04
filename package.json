@@ -1,7 +1,7 @@
 {
   "name": "new-nightware",
   "version": "1.0.0",
-  "description": "The web app described provides various services such as social media management, real-time chat, and music streaming. It has two main components, the frontend named 'Nebula' and the backend named 'Nexus'.",
+  "description": "This is a web app which provides various services such as social media management, real-time chat, and music streaming. It has two main components, the frontend named 'Nebula' and the backend named 'Nexus'.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
