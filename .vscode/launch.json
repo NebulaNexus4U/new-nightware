@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Nexus Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${file}",
+      "program": "${workspaceFolder}\\nexus\\server.ts",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]
