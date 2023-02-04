@@ -1,0 +1,56 @@
+{
+  "name": "nexus",
+  "version": "1.0.0",
+  "description": "Nexus is the backend service of a web app that offers various services such as social media management, real-time chat, and music streaming.",
+  "private": true,
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "main": "ts-node server.ts",
+    "dev": "nodemon server.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js .ts ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NebulaNexus4U/new-nightware.git"
+  },
+  "author": "Mohammed Abdul Wadudh Samdani, Punith Raj T",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NebulaNexus4U/new-nightware/issues"
+  },
+  "homepage": "https://github.com/NebulaNexus4U/new-nightware#readme",
+  "dependencies": {
+    "axios": "^1.3.2",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "mongodb": "^5.0.0",
+    "mongoose": "^6.9.0",
+    "passport": "^0.6.0",
+    "pino": "^8.8.0",
+    "zod": "^3.20.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.18",
+    "@types/passport": "^1.0.11",
+    "eslint": "^8.33.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.3",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
+  }
+}

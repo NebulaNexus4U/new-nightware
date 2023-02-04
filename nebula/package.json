@@ -1,5 +1,6 @@
 {
   "name": "nebula",
+  "description": "Nebula is the frontend component of a web app that offers various services such as social media management, real-time chat, and music streaming.",
   "private": true,
   "version": "0.0.0",
   "type": "module",
