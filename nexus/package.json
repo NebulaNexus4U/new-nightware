@@ -6,13 +6,16 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.ts"
+    "main": "ts-node server.ts",
+    "dev": "nodemon server.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js .ts ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NebulaNexus4U/new-nightware.git"
   },
-  "author": "",
+  "author": "Mohammed Abdul Wadudh Samdani, Punith Raj T",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/NebulaNexus4U/new-nightware/issues"
