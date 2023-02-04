@@ -1,0 +1,19 @@
+{
+  "name": "new-nightware",
+  "version": "1.0.0",
+  "description": "This is a web app which provides various services such as social media management, real-time chat, and music streaming. It has two main components, the frontend named 'Nebula' and the backend named 'Nexus'.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NebulaNexus4U/new-nightware.git"
+  },
+  "author": "Punith Raj T, Mohammed Abdul Wadudh Samdani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NebulaNexus4U/new-nightware/issues"
+  },
+  "homepage": "https://github.com/NebulaNexus4U/new-nightware#readme"
+}
