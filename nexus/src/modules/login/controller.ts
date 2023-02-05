@@ -7,27 +7,30 @@ import { compareTheHash, encryptIt, generateTheHash } from "../../common/utils/c
 
 const { Login } = Models;
 
+interface ILoginData {
+  loginProvider: string;
+  email: string;
+  accessToken: string;
+  name?: string;
+  refreshToken?: string;
+  avatar?: string;
+  password?: string;
+}
+
 /* Sing-Up Controller */
-export const userSignUp = async (req: Request, res: Response) => {
+export const userSignIn = async (req: Request, res: Response) => {
   try {
-    const { loginMethod, name, email, password, accessToken, avatar } = req.body;
+    const { loginProvider, name, email, accessToken, avatar, password }: ILoginData = get(
+      req,
+      "user.loginDetails",
+      req.body,
+    );
 
     // Checking Main Params for Processing the Signup is Prsent or Not
-    if ([loginMethod, email].some((i) => isEmpty(i))) {
+    if ([loginProvider, email].some((i) => isEmpty(i))) {
       return res.status(200).send({
         success: false,
-        message: "Unable to Process the Request Missing one or more parameters!",
-      });
-    }
-
-    // Checking if Account with Same Email Exists
-    const loginExists = await Login.findOne({ email }).lean();
-
-    if (loginExists) {
-      return res.status(200).send({
-        success: false,
-        message: `Account already exists with ${email} Email.`,
-        loginExists,
+        message: "Unable to Process Please Refresh and Try Again!",
       });
     }
 
@@ -35,79 +38,34 @@ export const userSignUp = async (req: Request, res: Response) => {
     let encryptedAccessToken = "";
 
     // Based on Login Methods encrypting / hasing the accessTokens
-    if (loginMethod === "direct") {
+    if (loginProvider === "direct") {
       hashedPassword = await generateTheHash(password);
     } else {
       encryptedAccessToken = encryptIt(accessToken);
     }
 
-    // Creating a Login
-    await Login.create({
-      name,
-      email,
-      avatar,
-      loginMethod: {
-        [loginMethod]:
-          loginMethod === "direct" ? { accessToken: hashedPassword } : { accessToken: encryptedAccessToken },
+    const userData = await Login.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          name,
+          avatar,
+          loginProvider: {
+            [loginProvider]:
+              loginProvider === "direct" ? { accessToken: hashedPassword } : { accessToken: encryptedAccessToken },
+          },
+        },
       },
-    });
+      { new: true, upsert: true },
+    ).lean();
 
     return res.status(200).send({
       success: true,
       message: `You have Successfully Signed Up with the ${email} Email`,
+      userData,
     });
   } catch (error) {
     Logger.info({ from: "Login_Controller_userSignUp()", errMsg: error.message });
-    return res.status(500).send({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-/* Sign-In Controller */
-export const userSignIn = async (req: Request, res: Response) => {
-  try {
-    const { loginMethod, email, password } = req.body;
-
-    // Checking Main Params for Processing the Signup is Prsent or Not
-    if ([loginMethod, email].some((i) => isEmpty(i))) {
-      return res.status(200).send({
-        success: false,
-        message: "Unable to Process the Request Missing one or more parameters!",
-      });
-    }
-
-    // Checking the Login Exists or not
-    const loginExists = await Login.findOne({ email }).lean();
-
-    if (!loginExists) {
-      return res.status(200).send({
-        success: false,
-        message: "Account Doesn't Exits",
-      });
-    }
-
-    // Based on the loginMethod Verifying the authenticity of the User
-    if (loginMethod === "direct") {
-      const hashedString = get(loginExists, `loginMethod.${loginMethod}.accessToken`, "");
-      const accessTokenVerified = await compareTheHash(password, hashedString);
-
-      if (!accessTokenVerified) {
-        return res.status(200).send({
-          success: false,
-          message: "Incorrect Password",
-        });
-      }
-    }
-
-    return res.status(200).send({
-      success: true,
-      message: "Login Success",
-      loginExists,
-    });
-  } catch (error) {
-    Logger.error({ from: "Login_Controller_userSignIn()", errMsg: error.message });
     return res.status(500).send({
       success: false,
       message: error.message,
@@ -122,7 +80,7 @@ export const changePassword = async (req: Request, res: Response) => {
   try {
     const loginExists = await Login.findOne({ email }).lean();
 
-    const hashedString = get(loginExists, "loginMethod.direct.accessToken", "");
+    const hashedString = get(loginExists, "loginProvider.direct.accessToken", "");
     const accessTokenVerified = await compareTheHash(oldPassword, hashedString);
 
     if (!accessTokenVerified) {
@@ -136,7 +94,7 @@ export const changePassword = async (req: Request, res: Response) => {
 
     const updatePassword = await Login.findOneAndUpdate(
       { email },
-      { $set: { "loginMethod.direct.accessToken": hashedPassword } },
+      { $set: { "loginProvider.direct.accessToken": hashedPassword } },
       { new: true },
     ).lean();
 
@@ -161,6 +119,5 @@ export const changePassword = async (req: Request, res: Response) => {
 
 export default {
   userSignIn,
-  userSignUp,
   changePassword,
 };
