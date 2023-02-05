@@ -9,8 +9,6 @@ import expressRoutes from "./routes";
 
 const { PORT_NO, MONGO_URI } = process.env;
 
-global.Logger = Logger;
-
 const mongoDbNative = new MongoClient(MONGO_URI);
 
 (async () => {
@@ -27,6 +25,8 @@ const mongoDbNative = new MongoClient(MONGO_URI);
     mongoose.set("strictQuery", false);
     await mongoose.connect(MONGO_URI);
 
+    // eslint-disable-next-line global-require
+    require("./models");
     // All Express Routes
     app.use(expressRoutes());
 
