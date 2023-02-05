@@ -9,3 +9,10 @@
 - User Authentication and Authorization: Nexus manages user authentication and authorization to ensure secure access to the services offered by the web app.
 - Scalability and Performance Optimization: Nexus is designed to handle scalability and performance optimization to ensure the web app operates efficiently and effectively.
 - These features of Nexus provide the necessary processing and management capabilities for the web app to deliver the various services offered to the users through the frontend.
+
+### Instructions for Running the Nexus
+
+- Please run the following in bash:
+  - `npm i -g ts-node nodemon`
+  - `npm i `
+  - `npm run dev`
