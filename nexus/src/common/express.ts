@@ -31,9 +31,6 @@ export default function expressApp() {
       secret: COOKIE_SECRET,
       resave: true,
       saveUninitialized: true,
-      cookie: {
-        maxAge: 1000 * 60 * 100,
-      },
     }),
   );
   app.use(bodyParser.json({ limit: bodyParserLimit }));

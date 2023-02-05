@@ -44,20 +44,24 @@ export const userSignIn = async (req: Request, res: Response) => {
       encryptedAccessToken = encryptIt(accessToken);
     }
 
-    const userData = await Login.findOneAndUpdate(
-      { email },
-      {
-        $set: {
-          name,
-          avatar,
-          loginProvider: {
-            [loginProvider]:
-              loginProvider === "direct" ? { accessToken: hashedPassword } : { accessToken: encryptedAccessToken },
-          },
+    const findOneUser = await Login.findOne({ email }).lean();
+
+    const findQ = { email };
+    const updateQ = {
+      $set: {
+        email,
+        name,
+        avatar,
+        loginProvider: {
+          ...(!isEmpty(findOneUser) && findOneUser.loginProvider),
+          [loginProvider]:
+            loginProvider === "direct" ? { accessToken: hashedPassword } : { accessToken: encryptedAccessToken },
         },
       },
-      { new: true, upsert: true },
-    ).lean();
+    };
+    const options = { new: true, upsert: true };
+
+    const userData = await Login.findOneAndUpdate(findQ, updateQ, options).lean();
 
     return res.status(200).send({
       success: true,
