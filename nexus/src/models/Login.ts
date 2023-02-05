@@ -4,7 +4,7 @@ import paginate from "mongoose-paginate-v2";
 interface ILogin {
   name: string;
   email: string;
-  loginMethod: object;
+  loginProvider: object;
   avatar?: string;
 }
 
@@ -39,7 +39,7 @@ const loginSchema = new Schema<ILogin>(
       trim: true,
       lowercase: true,
     },
-    loginMethod: {
+    loginProvider: {
       type: Map,
       of: authKeysSchema,
     },
