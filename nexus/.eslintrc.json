@@ -25,6 +25,8 @@
     "no-unused-vars": ["warn"],
     "import/no-unresolved": ["off"],
     "import/extensions": ["warn", { "commonjs": true, "amd": true, "ifnore": ["\\.ts$"] }],
+    "@typescript-eslint/no-explicit-any": ["warn"],
+
     "prettier/prettier": [
       "error",
       {
