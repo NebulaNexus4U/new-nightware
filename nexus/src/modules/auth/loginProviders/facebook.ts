@@ -23,7 +23,7 @@ passport.use(
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
-      const loginProvider = "facebook";
+      const loginProvider = get(profile, "provider", "");
       const email = get(profile, "_json.email", "");
       const avatar = get(profile, "_json.picture.data.url", "");
       const name = get(profile, "_json.name", "");
@@ -35,12 +35,12 @@ passport.use(
         accessToken,
         avatar,
       };
-      const dada = {
+      const profileData = {
         ...profile,
         loginDetails,
       };
 
-      return done(null, dada);
+      return done(null, profileData);
     },
   ),
 );
