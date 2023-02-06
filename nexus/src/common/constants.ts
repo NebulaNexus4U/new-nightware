@@ -11,3 +11,11 @@ export const googleOAuth = {
   params: { scope: ["email", "profile"] },
   state: true,
 };
+
+export const facebookOAuth = {
+  clientID: "585310313101357",
+  clientSecret: "29e16df96509031a53a03f1fc51ec309",
+  callbackURL: "http://localhost:4000/auth/facebook/callback",
+  params: { scope: ["email", "user_location"] },
+  profileFields: ["id", "displayName", "photos", "email"],
+};

@@ -10,7 +10,13 @@ export default function allRoutes() {
   router.use("/login", loginRoutes());
   router.use("/auth", authRoutes());
 
-  router.get("/", (req, res) => res.status(200).send("<a href='/auth/google'>Athunticate with Google</a>"));
+  router.get("/", (req, res) =>
+    res
+      .status(200)
+      .send(
+        "<a  href='/auth/facebook'  target='popup' >Facebook Authenticate</a> <br> <a  href='/auth/google'  target='popup' >Google Authenticate</a>",
+      ),
+  );
 
   return router;
 }

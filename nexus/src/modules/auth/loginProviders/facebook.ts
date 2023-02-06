@@ -1,9 +1,9 @@
 import { get } from "lodash";
 import passport from "passport";
 
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as FacebookStrategy } from "passport-facebook";
 
-import { googleOAuth } from "../../../common/constants";
+import { facebookOAuth } from "../../../common/constants";
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -14,17 +14,18 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(
-  new GoogleStrategy(
+  new FacebookStrategy(
     {
-      clientID: googleOAuth.clientID,
-      clientSecret: googleOAuth.clientSecret,
-      callbackURL: googleOAuth.callbackURL,
+      clientID: facebookOAuth.clientID,
+      clientSecret: facebookOAuth.clientSecret,
+      callbackURL: facebookOAuth.callbackURL,
+      profileFields: facebookOAuth.profileFields,
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
       const loginProvider = get(profile, "provider", "");
       const email = get(profile, "_json.email", "");
-      const avatar = get(profile, "_json.picture", "");
+      const avatar = get(profile, "_json.picture.data.url", "");
       const name = get(profile, "_json.name", "");
 
       const loginDetails = {
