@@ -5,8 +5,8 @@
   "private": true,
   "main": "src/server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "main": "ts-node src/server.ts | pino-pretty",
+    "build": "tsc",
+    "start": "node ./dist/server.js",
     "dev": "nodemon src/server.ts | pino-pretty",
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext .js .ts ."
