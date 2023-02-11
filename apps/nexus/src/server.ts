@@ -28,7 +28,7 @@ const mongoDbNative = new MongoClient(MONGO_URI);
     // eslint-disable-next-line global-require
     require("./models");
     // All Express Routes
-    app.use(expressRoutes());
+    app.use("/api", expressRoutes());
 
     app.listen(PORT_NO, () => Logger.info(`Nexus is started & Listening on Port No: ${PORT_NO}`));
   } catch (error) {

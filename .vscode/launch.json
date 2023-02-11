@@ -21,7 +21,7 @@
       "request": "launch",
       "name": "Nexus Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\nexus\\src\\server.ts",
+      "program": "${workspaceFolder}\\apps\\nexus\\src\\server.ts",
       // "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/nexus/.env",
