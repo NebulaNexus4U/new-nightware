@@ -7,9 +7,7 @@ export default function App() {
   return (
     <div className="h-screen">
       <Navbar color={themeColor} />
-      <div
-        className={`relative bg-gradient-to-r from-${themeColor}-500 to-${themeColor}-400 min-h-[89.9vh] flex items-center justify-center`}
-      >
+      <div className={`relative bg-gradient-to-r from-${themeColor}-500 to-${themeColor}-400 min-h-[89.9vh] flex `}>
         <RouterProvider router={newNightmareRoutes} />
       </div>
     </div>
