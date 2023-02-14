@@ -40,9 +40,9 @@ export default function ErrorPage(props: IErrPageProps) {
   const { color = "blue", className } = props;
 
   return (
-    <div className={classNames(theme.color[color], className)}>
+    <div className={classNames(theme.color[color], className, "w-full")}>
       <div className="bg-gradiant-to-r from-blue-400 to-blue-300"></div>
-      <div className="w-9/12 m-auto py-16 flex items-center justify-center min-h-screen">
+      <div className="w-9/12 m-auto py-16 flex items-center justify-center">
         <div className={classNames(theme.four0FourBox.base, theme.four0FourBox.color[color])}>
           <div className="border-t border-gray-200 text-center pt-8">
             <h1 className={classNames(theme.four0FourColor.base, theme.four0FourColor.color[color])}>404</h1>
